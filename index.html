@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingeniería de Sistemas | Universidad de la Amazonia</title>
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts (Plus Jakarta Sans & Outfit) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0f3822;
+            --accent-color: #2ecc71;
+            --dark-bg: #0b1f14;
+            --external-links-bg: #122b1d;
+            --light-bg: #f8faf9;
+            --text-main: #2c3e50;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            background-color: #ffffff;
+            overflow-x: hidden;
+            padding-top: 80px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .navbar-brand {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .navbar {
+            background: var(--primary-color) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            width: 96%;
+            max-width: 1320px;
+            margin: 8px auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0.6rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-brand span {
+            color: #ffffff !important;
+            font-weight: 700;
+        }
+
+        .navbar-brand i {
+            color: var(--accent-color) !important;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #ffffff !important;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color) !important;
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        /* Solución para el banner: usar width 100% limpio dentro del flujo */
+        .full-banner-container {
+            width: 100%;
+            background-color: var(--primary-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .full-banner-container img {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(11, 31, 20, 0.9), rgba(15, 56, 34, 0.9)), url('https://radionacional-v3.s3.amazonaws.com/s3fs-public/node/article/field_image/uniamazonia.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .hero-badge {
+            background: rgba(46, 204, 113, 0.15);
+            color: var(--accent-color);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .info-card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(15, 56, 34, 0.1);
+        }
+
+        .info-card i {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        section {
+            padding: 90px 0;
+        }
+
+        .bg-soft {
+            background-color: var(--light-bg);
+        }
+
+        .section-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .nav-pills .nav-link {
+            background-color: var(--light-bg);
+            color: var(--primary-color) !important;
+            border: 1px solid rgba(15, 56, 34, 0.15);
+            transition: all 0.2s ease;
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .show>.nav-link {
+            background-color: var(--primary-color) !important;
+            color: #ffffff !important;
+        }
+
+        .subject-card {
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 15px;
+            height: 100%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            transition: transform 0.2s ease;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .convenciones-container {
+            padding: 15px 20px;
+        }
+
+        .botones-convenciones {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            padding: 15px 0;
+        }
+
+        .btn-convencion {
+            padding: 10px 16px;
+            border-radius: 6px;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            animation: aparecerYFlotar 0.8s ease-out backwards;
+        }
+
+        .btn-convencion:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes aparecerYFlotar {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .color-box {
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+            margin-right: 12px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .verde {
+            background-color: #198754;
+        }
+
+        .azul {
+            background-color: #0d6efd;
+        }
+
+        .rojo {
+            background-color: #bb2d3b;
+        }
+
+        .gris {
+            background-color: #5c5c5c;
+        }
+
+        .mission-vision-section {
+            background-color: var(--external-links-bg);
+            color: #ffffff;
+        }
+
+        .mission-vision-section .section-title {
+            color: #ffffff;
+        }
+
+        .mission-vision-section p.text-muted {
+            color: #adb5bd !important;
+        }
+
+        .vision-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 35px;
+            border-radius: 0 16px 16px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            height: 100%;
+            color: #ffffff;
+        }
+
+        .vision-card p {
+            color: #d1d5db !important;
+        }
+
+        .location-section {
+            background: linear-gradient(135deg, rgba(11, 31, 20, 0.92), rgba(15, 56, 34, 0.92)),
+                url('https://www.uniamazonia.edu.co/inicio/images/En%20portada/Universidad/Fachada%20bloque%20administrativo%20Uniamazonia.JPG');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .location-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-top: 4px solid var(--accent-color);
+            padding: 30px;
+            border-radius: 16px;
+            height: 100%;
+            color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .location-card i {
+            color: var(--accent-color);
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+
+        .contact-section {
+            background-color: var(--light-bg);
+            color: var(--text-main);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .quick-links-bar {
+            background-color: var(--external-links-bg);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px 0;
+        }
+
+        .quick-links-bar a {
+            color: #adb5bd;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quick-links-bar a:hover {
+            color: var(--accent-color);
+        }
+
+        footer {
+            background-color: var(--dark-bg);
+            color: #7b8a8b;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid px-3">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <i class="fa-solid fa-laptop-code text-success fs-4"></i>
+                <span>Ingeniería de Sistemas</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center gap-3">
+                    <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#programa">El Programa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#mision-vision">Misión y Visión</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#perfil">Perfil Profesional</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#localizacion">Localización</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                    <li class="nav-item"><a href="https://www.uniamazonia.edu.co" target="_blank"
+                            class="btn btn-success btn-sm px-4 rounded-pill">Uniamazonia</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="full-banner-container" data-aos="fade">
+        <img src="https://www.uniamazonia.edu.co/inicio/images/banners/2024/Actualización/Banner/Programas/Ing%20istemas.jpg"
+            alt="Banner Oficial Ingeniería de Sistemas Uniamazonia">
+    </div>
+
+    <header id="inicio" class="hero-section">
+        <div class="container text-center text-md-start">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                    <h1 class="display-4 fw-bold mb-4">Innovación Tecnológica para el Desarrollo Sostenible de la Región
+                    </h1>
+                    <p class="lead text-light opacity-8 mb-4">Formamos profesionales íntegros capaces de transformar el
+                        entorno mediante soluciones computacionales avanzadas, ciencia e investigación.</p>
+                    <div class="d-flex gap-3 justify-content-center">
+                        <a href="#programa" class="btn btn-success btn-lg px-4 rounded-pill fw-semibold">Explorar
+                            Programa</a>
+                        <a href="#contacto" class="btn btn-outline-light btn-lg px-4 rounded-pill">Contáctanos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="info-grid">
+            <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h6 class="text-muted text-uppercase fs-7 fw-bold">Título Otorgado</h6>
+                <h5 class="fw-bold mb-0">Ingeniero de Sistemas</h5>
+            </div>
+            <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fa-solid fa-fingerprint"></i>
+                <h6 class="text-muted text-uppercase fs-7 fw-bold">Código SNIES</h6>
+                <h5 class="fw-bold mb-0">52384</h5>
+            </div>
+            <div class="info-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fa-solid fa-clock"></i>
+                <h6 class="text-muted text-uppercase fs-7 fw-bold">Duración y Créditos</h6>
+                <h5 class="fw-bold mb-0">10 Semestres / 178 Créditos</h5>
+            </div>
+            <div class="info-card" data-aos="fade-up" data-aos-delay="400">
+                <i class="fa-solid fa-building-columns"></i>
+                <h6 class="text-muted text-uppercase fs-7 fw-bold">Modalidad / Jornada</h6>
+                <h5 class="fw-bold mb-0">Presencial / Diurna</h5>
+            </div>
+        </div>
+    </div>
+
+    <section id="programa" class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <h2 class="section-title h1">Propósito de Formación</h2>
+                <p class="text-muted mb-4">El programa de Ingeniería de Sistemas de la Universidad de la Amazonia diseña
+                    procesos de formación integral mediante un currículo que integra ciencias básicas, ingeniería,
+                    campos tecnológicos e investigativos.</p>
+                <ul class="list-unstyled d-flex flex-column gap-3">
+                    <li class="d-flex align-items-center gap-3">
+                        <i class="fa-solid fa-circle-check text-success fs-5"></i>
+                        <span>Creación y aplicación de soluciones computacionales eficientes.</span>
+                    </li>
+                    <li class="d-flex align-items-center gap-3">
+                        <i class="fa-solid fa-circle-check text-success fs-5"></i>
+                        <span>Soporte en Tecnologías de la Información y Comunicación (TIC).</span>
+                    </li>
+                    <li class="d-flex align-items-center gap-3">
+                        <i class="fa-solid fa-circle-check text-success fs-5"></i>
+                        <span>Compromiso con el desarrollo económico y sustentable de la Amazonía.</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="p-4 bg-soft rounded-4 border">
+                    <h4 class="fw-bold mb-3 text-success">Resolución y Registro Calificado</h4>
+                    <p>Aprobado mediante el <strong>Acuerdo 16 de 2004</strong> y con renovación de Registro Calificado
+                        según la <strong>Resolución 001562 del 16 de febrero de 2022</strong> del Ministerio de
+                        Educación Nacional.</p>
+                    <hr class="my-4">
+                    <h5 class="fw-bold mb-2">Plan de Estudios Vigente</h5>
+                    <p class="text-muted mb-3">Diseñado bajo el Acuerdo 44 de diciembre de 2020, enfocado en las
+                        dinámicas tecnológicas actuales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="plan-estudios" class="bg-soft py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="hero-badge mb-3 d-inline-block">Pensum 2020 — Acuerdo 44</span>
+                <h2 class="section-title h1">Plan de Estudios</h2>
+                <p class="text-muted">Explora las asignaturas organizadas por semestre correspondientes al programa de
+                    Ingeniería de Sistemas.</p>
+            </div>
+
+            <ul class="nav nav-pills justify-content-center mb-5 gap-2" id="semestresTab" role="tablist"
+                data-aos="fade-up">
+                <li class="nav-item"><button class="nav-link active rounded-pill px-3 py-2 fw-semibold"
+                        data-bs-toggle="pill" data-bs-target="#sem-1" type="button">I</button></li>
+                <li class="nav-item"><button class="nav-link rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="pill"
+                        data-bs-target="#sem-2" type="button">II</button></li>
+                <li class="nav-item"><button class="nav-link rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="pill"
+                        data-bs-target="#sem-3" type="button">III</button></li>
+                <li class="nav-item"><button class="nav-link rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="pill"
+                        data-bs-target="#sem-4" type="button">IV</button></li>
+                <li class="nav-item"><button class="nav-link rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="pill"
+                        data-bs-target="#sem-5" type="button">V</button></li>
+                <li class="nav-item"><button class="nav-link rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="pill"
+                        data-bs-target="#sem-6" type="button">VI</button></li>
+                <li class="nav-item"><button class="nav-link rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="pill"
+                        data-bs-target="#sem-7" type="button">VII</button></li>
+                <li class="nav-item"><button class="nav-link rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="pill"
+                        data-bs-target="#sem-8" type="button">VIII</button></li>
+                <li class="nav-item"><button class="nav-link rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="pill"
+                        data-bs-target="#sem-9" type="button">IX</button></li>
+                <li class="nav-item"><button class="nav-link rounded-pill px-3 py-2 fw-semibold" data-bs-toggle="pill"
+                        data-bs-target="#sem-10" type="button">X</button></li>
+            </ul>
+
+            <div class="tab-content" id="semestresContent" data-aos="fade-up">
+
+                <div class="tab-pane fade show active" id="sem-1">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-success mb-2">Cód: 9900011</span>
+                                <h6 class="fw-bold mb-1">Matemáticas I</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-success mb-2">Cód: 9900020</span>
+                                <h6 class="fw-bold mb-1">Física I</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-success mb-2">Cód: 9900030</span>
+                                <h6 class="fw-bold mb-1">Biología General</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-primary mb-2">Cód: 9900033</span>
+                                <h6 class="fw-bold mb-1">Introducción a la Ingeniería</h6>
+                                <p class="small text-muted mb-0">Créditos: 2</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-primary mb-2">Cód: 9900036</span>
+                                <h6 class="fw-bold mb-1">Lógica y Algoritmos I</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-secondary mb-2">Cód: 9900001</span>
+                                <h6 class="fw-bold mb-1">Comunicación</h6>
+                                <p class="small text-muted mb-0">Créditos: 2</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-secondary mb-2">Cód: 9900008</span>
+                                <h6 class="fw-bold mb-1">Deportes y Cultura</h6>
+                                <p class="small text-muted mb-0">Créditos: 2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="sem-2">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-success mb-2">Cód: 9900012</span>
+                                <h6 class="fw-bold mb-1">Matemáticas II</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-success mb-2">Cód: 9900021</span>
+                                <h6 class="fw-bold mb-1">Física II</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-success mb-2">Cód: 9900026</span>
+                                <h6 class="fw-bold mb-1">Química I</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-primary mb-2">Cód: 9900038</span>
+                                <h6 class="fw-bold mb-1">Teoría General de Sistemas</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-primary mb-2">Cód: 9900037</span>
+                                <h6 class="fw-bold mb-1">Lógica y Algoritmos II</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-secondary mb-2">Cód: 9900002</span>
+                                <h6 class="fw-bold mb-1">Constitución y Democracia</h6>
+                                <p class="small text-muted mb-0">Créditos: 2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="sem-3">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-success mb-2">Cód: 9900050</span>
+                                <h6 class="fw-bold mb-1">Álgebra Lineal</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-success mb-2">Cód: 72030301</span>
+                                <h6 class="fw-bold mb-1">Matemáticas Discretas</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-primary mb-2">Cód: 72030302</span>
+                                <h6 class="fw-bold mb-1">Análisis de Sistemas</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-primary mb-2">Cód: 72030303</span>
+                                <h6 class="fw-bold mb-1">Estructuras de Datos I</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-secondary mb-2">Cód: 9900009</span>
+                                <h6 class="fw-bold mb-1">Idioma Extranjero I</h6>
+                                <p class="small text-muted mb-0">Créditos: 2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="sem-4">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-success mb-2">Cód: 72030401</span>
+                                <h6 class="fw-bold mb-1">Ecuaciones Diferenciales</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-primary mb-2">Cód: 72030402</span>
+                                <h6 class="fw-bold mb-1">Estadística para Ingeniería</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030403</span>
+                                <h6 class="fw-bold mb-1">Ingeniería de Software I</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-primary mb-2">Cód: 72030405</span>
+                                <h6 class="fw-bold mb-1">Estructuras de Datos II</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030404</span>
+                                <h6 class="fw-bold mb-1">Sistemas Operativos</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="sem-5">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-success mb-2">Cód: 72030501</span>
+                                <h6 class="fw-bold mb-1">Métodos Numéricos</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030502</span>
+                                <h6 class="fw-bold mb-1">Ingeniería de Software II</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030503</span>
+                                <h6 class="fw-bold mb-1">Programación Web</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030504</span>
+                                <h6 class="fw-bold mb-1">Diseño de Base de Datos</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-secondary mb-2">Cód: 9900010</span>
+                                <h6 class="fw-bold mb-1">Idioma Extranjero II</h6>
+                                <p class="small text-muted mb-0">Créditos: 2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="sem-6">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-success mb-2">Cód: 72030601</span>
+                                <h6 class="fw-bold mb-1">Modelos Determinísticos</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030602</span>
+                                <h6 class="fw-bold mb-1">Ingeniería de Software III</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030603</span>
+                                <h6 class="fw-bold mb-1">Programación Móvil</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030604</span>
+                                <h6 class="fw-bold mb-1">Redes Informáticas I</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-secondary mb-2">Cód: 9900003</span>
+                                <h6 class="fw-bold mb-1">Filosofía e Historia de la Ciencia</h6>
+                                <p class="small text-muted mb-0">Créditos: 2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="sem-7">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030701</span>
+                                <h6 class="fw-bold mb-1">Proyectos Software</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030702</span>
+                                <h6 class="fw-bold mb-1">Inteligencia Computacional I</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030703</span>
+                                <h6 class="fw-bold mb-1">Redes Informáticas II</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030704</span>
+                                <h6 class="fw-bold mb-1">Administración de Base de Datos</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-primary mb-2">Cód: 9900034</span>
+                                <h6 class="fw-bold mb-1">Metodología de la Investigación I</h6>
+                                <p class="small text-muted mb-0">Créditos: 2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="sem-8">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030801</span>
+                                <h6 class="fw-bold mb-1">PESI</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030802</span>
+                                <h6 class="fw-bold mb-1">Inteligencia Computacional II</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030803</span>
+                                <h6 class="fw-bold mb-1">Taller: Emprendimiento e Innovación</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-primary mb-2">Cód: 9900035</span>
+                                <h6 class="fw-bold mb-1">Metodología de la Investigación II</h6>
+                                <p class="small text-muted mb-0">Créditos: 2</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-secondary mb-2">Cód: 9900006</span>
+                                <h6 class="fw-bold mb-1">Ética</h6>
+                                <p class="small text-muted mb-0">Créditos: 2</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-secondary mb-2">Cód: 9900004</span>
+                                <h6 class="fw-bold mb-1">Desarrollo Humano</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="sem-9">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030903</span>
+                                <h6 class="fw-bold mb-1">Electiva I</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030904</span>
+                                <h6 class="fw-bold mb-1">Electiva II</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72030901</span>
+                                <h6 class="fw-bold mb-1">Gestión Tecnológica</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-primary mb-2">Cód: 72030902</span>
+                                <h6 class="fw-bold mb-1">Taller Escritura Científica</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-secondary mb-2">Cód: 9900005</span>
+                                <h6 class="fw-bold mb-1">Universidad Región y Medio Ambiente</h6>
+                                <p class="small text-muted mb-0">Créditos: 3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="sem-10">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72031001</span>
+                                <h6 class="fw-bold mb-1">Electiva III</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="badge bg-danger mb-2">Cód: 72031002</span>
+                                <h6 class="fw-bold mb-1">Electiva IV</h6>
+                                <p class="small text-muted mb-0">Créditos: 4</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="subject-card"><span class="black mb-2">Cód: 72031003</span>
+                                <h6 class="fw-bold mb-1">Opción de Grado</h6>
+                                <p class="small text-muted mb-0">Créditos: 10</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="botones-convenciones" data-aos="fade-up">
+            <div class="btn-convencion verde">Ciencias Básicas (20%)</div>
+            <div class="btn-convencion azul">Básicas de Ingeniería (20%)</div>
+            <div class="btn-convencion rojo">Ingeniería Aplicada (43%)</div>
+            <div class="btn-convencion gris">Socio Humanísticas y de Contextualización (11%)</div>
+        </div>
+
+    </section>
+
+    <section id="mision-vision" class="mission-vision-section">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title h1 text-white">Nuestra Identidad Institucional</h2>
+                <p class="text-muted">Directrices estratégicas que guían el compromiso académico y social del programa.
+                </p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="vision-card">
+                        <h3 class="fw-bold text-success mb-3"><i class="fa-solid fa-bullseye me-2"></i> Misión</h3>
+                        <p class="mb-0">Asume como encargo social la formación de profesionales íntegros, con capacidad
+                            para crear, innovar, formular y solucionar problemáticas organizacionales y productivas,
+                            apoyados en sistemas de información e infraestructura tecnológica para potenciar el
+                            desarrollo regional y nacional.</p>
+                    </div>
+                </div>
+                <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="vision-card">
+                        <h3 class="fw-bold text-success mb-3"><i class="fa-solid fa-eye me-2"></i> Visión</h3>
+                        <p class="mb-0">Ser un programa académico en permanente acreditación académica y social, líder
+                            en la formación integral de profesionales competentes en el campo investigativo, humanístico
+                            y tecnológico, comprometidos profundamente con la Amazonia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="perfil" class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-5 text-center" data-aos="zoom-in">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop"
+                    alt="Perfil Profesional Ingenieria de Sistemas" class="img-fluid rounded-4 shadow">
+            </div>
+            <div class="col-lg-7" data-aos="fade-left">
+                <h2 class="section-title h1">Perfil de Egreso</h2>
+                <p class="text-muted mb-4">El Ingeniero de Sistemas de la Universidad de la Amazonia es un profesional
+                    con alta sensibilidad contextual y analítica:</p>
+                <div class="d-flex flex-column gap-3">
+                    <div class="p-3 bg-white rounded-3 shadow-sm border-start border-3 border-success">
+                        <h6 class="fw-bold mb-1">Ética y Responsabilidad Social</h6>
+                        <p class="text-muted mb-0 fs-7">Comprende las dinámicas del entorno con sólida responsabilidad
+                            legal, ética, social, económica y cultural.</p>
+                    </div>
+                    <div class="p-3 bg-white rounded-3 shadow-sm border-start border-3 border-success">
+                        <h6 class="fw-bold mb-1">Aprendizaje Continuo</h6>
+                        <p class="text-muted mb-0 fs-7">Reconoce la evolución constante de su disciplina e implementa
+                            estrategias autónomas orientadas a su perfeccionamiento profesional continuo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="localizacion" class="location-section position-relative">
+        <div class="container position-relative" style="z-index: 2;">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="hero-badge mb-3 d-inline-block">Universidad de la Amazonia</span>
+                <h2 class="section-title h1 text-white">Localización y Campus</h2>
+                <p class="text-light opacity-75">Conoce el espacio físico y geográfico donde se gesta la academia e
+                    investigación tecnológica.</p>
+            </div>
+
+            <div class="row g-4 justify-content-center align-items-stretch">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="location-card text-center d-flex flex-column justify-content-center">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <h4 class="fw-bold mb-3 text-white">Ciudad y Región</h4>
+                        <p class="text-light opacity-75 mb-0">Florencia, Caquetá — Colombia. Ubicados estratégicamente
+                            en la puerta de oro de la Amazonia colombiana.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="location-card text-center d-flex flex-column justify-content-center">
+                        <i class="fa-solid fa-building-columns"></i>
+                        <h4 class="fw-bold mb-3 text-white">Campus Principal</h4>
+                        <p class="text-light opacity-75 mb-0">Barrio El Porvenir. Espacios dotados de infraestructura
+                            administrativa y laboratorios especializados para la formación.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="location-card p-2 text-center d-flex flex-column justify-content-center">
+                        <div class="ratio ratio-4x3 rounded-3 overflow-hidden shadow-sm">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.8728956976214!2d-75.6083556!3d1.6141667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e2faf5d918a9937%3A0xf67b7bc8f8c42a5c!2sUniversidad%20de%20la%20Amazonia!5e0!3m2!1ses!2sco!4v1650000000000!5m2!1ses!2sco"
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                        <span class="small text-light opacity-75 mt-2"><i
+                                class="fa-solid fa-location-dot text-success me-1"></i> Ver en tiempo real</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="contact-section">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h2 class="section-title h1 mb-4">Información de Contacto</h2>
+                    <p class="text-muted mb-4">Comunícate con la coordinación del programa para resolver tus inquietudes
+                        sobre admisiones, procesos académicos o convenios.</p>
+                    <ul class="list-unstyled d-flex flex-column gap-3">
+                        <li class="d-flex align-items-center gap-3">
+                            <i class="fa-solid fa-user-tie text-success fs-4"></i>
+                            <span><strong>Coordinadora:</strong> Paula Andrea Chica Murcia</span>
+                        </li>
+                        <li class="d-flex align-items-center gap-3">
+                            <i class="fa-solid fa-phone text-success fs-4"></i>
+                            <span><strong>Teléfono:</strong> 320 454 1936</span>
+                        </li>
+                        <li class="d-flex align-items-center gap-3">
+                            <i class="fa-solid fa-envelope text-success fs-4"></i>
+                            <span><strong>Correo:</strong> pisistemas@uniamazonia.edu.co</span>
+                        </li>
+                        <li class="d-flex align-items-center gap-3">
+                            <i class="fa-solid fa-location-dot text-success fs-4"></i>
+                            <span><strong>Ubicación:</strong> Campus Florencia, Barrio El Porvenir, Bloque
+                                Administrativo, Primer Piso</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 d-flex align-items-center justify-content-center" data-aos="fade-left">
+                    <div class="card bg-white border shadow-sm p-4 rounded-4 w-100">
+                        <h4 class="fw-bold mb-3 text-success">¿Listo para transformar tu futuro?</h4>
+                        <p class="text-muted mb-4">Consulta las fechas oficiales de inscripción y prepárate para ser
+                            parte de la comunidad ingenieril de la Amazonia colombiana.</p>
+                        <a href="https://www.uniamazonia.edu.co" target="_blank"
+                            class="btn btn-success rounded-pill fw-semibold py-2">Ir al Portal Oficial Uniamazonia</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="quick-links-bar" data-aos="fade-up">
+        <div class="container-fluid px-4">
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                <div>
+                    <a href="https://www.uniamazonia.edu.co" target="_blank"><i
+                            class="fa-solid fa-laptop-code text-success"></i> Aula Extendida</a>
+                </div>
+                <div>
+                    <a href="https://www.uniamazonia.edu.co" target="_blank"><i
+                            class="fa-solid fa-graduation-cap text-success"></i> Ingreso a Campus Virtual</a>
+                </div>
+                <div>
+                    <a href="https://mail.google.com" target="_blank"><i class="fa-solid fa-envelope text-success"></i>
+                        Ingreso al correo</a>
+                </div>
+                <div>
+                    <a href="https://chaira.uniamazonia.edu.co" target="_blank"><i
+                            class="fa-solid fa-globe text-success"></i> Ingreso a Chairá <i
+                            class="fa-solid fa-chevron-up ms-1 small"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container text-center">
+            <p class="mb-1">Universidad de la Amazonia — Programa de Ingeniería de Sistemas</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: false,
+            mirror: true
+        });
+    </script>
+</body>
+
+</html>
